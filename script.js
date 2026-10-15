@@ -22,46 +22,39 @@ class Card {
         this.number = number;
         this.image = image;
 
-        // Create the card's outer element.
+        // Creates the cards outer element.
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('card');
         this.cardElement.tabIndex = 0;
         this.cardElement.setAttribute('role', 'button');
         this.cardElement.setAttribute('aria-pressed', 'false');
 
-        // Create the elements for the card's information.
+        // Creates the elements for the cards information.
         this.imageElement = document.createElement('img');
         this.nameElement = document.createElement('h2');
         this.countryElement = document.createElement('p');
         this.numberElement = document.createElement('p');
 
-        // Place the information elements inside the card.
+        // Places the information elements inside the card.
         this.cardElement.appendChild(this.imageElement);
         this.cardElement.appendChild(this.nameElement);
         this.cardElement.appendChild(this.countryElement);
         this.cardElement.appendChild(this.numberElement);
 
-        // Keep the same event-listener structure as the Book example.
+        // remembers which card to highlight when I click it.
         const that = this;
         this.onClick = function() {
             that.highlight();
         };
         this.cardElement.addEventListener('click', this.onClick);
 
-        // Let keyboard users select a card with Enter or Space, too.
-        this.cardElement.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                that.highlight();
-            }
-        });
 
         // Add the completed card element to the page.
         document.getElementById('card_container').appendChild(this.cardElement);
     }
 
     displayCard() {
-        // Put this card's data into its HTML elements.
+        // Put this cards data into its HTML elements.
         this.imageElement.src = this.image;
         this.imageElement.alt = this.country + ' soccer jersey illustration';
         this.nameElement.innerText = this.name;
@@ -70,7 +63,7 @@ class Card {
     }
 
     highlight() {
-        // Toggle adds the class if missing and removes it if already present.
+        // turns the highlight on and off
         const selected = this.cardElement.classList.toggle('selected');
         this.cardElement.setAttribute('aria-pressed', selected);
     }
